@@ -1,6 +1,6 @@
 import { Request, Response, request, response } from "express";
-import { SecretsByIdController } from "../src/SecretsByIdController";
-import { UrlIdValidationError } from "../src/UrlIdValidationError";
+import { SecretsByIdController } from "../../src/rest/SecretsByIdController";
+import { UrlIdValidationError } from "../../src/UrlIdValidationError";
 
 describe("SecretByIdController Tests", () => {
   it("should throw an error if the urlId is too short", () => {
