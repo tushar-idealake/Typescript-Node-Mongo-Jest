@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import server from "../src/server"
+import server from "../src/server";
 
 const request = supertest(server);
 
@@ -8,8 +8,8 @@ describe("Get Secrets Intigration tests", () => {
     const response = await request.get("/api/v1/secrets/2short");
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      name: "URLIdValidationError",
-      message: "URLId is too short",
+      name: "UrlIdValidationError",
+      message: "UrlId is too short",
     });
   });
   xit("Should return an error when secret does not exist in the system", () => {});
