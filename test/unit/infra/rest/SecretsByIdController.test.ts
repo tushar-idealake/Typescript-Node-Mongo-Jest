@@ -1,10 +1,9 @@
 import { Request, Response, request, response } from "express";
-import { SecretsByIdController } from "../../src/rest/SecretsByIdController";
-import { UrlIdValidationError } from "../../src/UrlIdValidationError";
-import { SecretNotFoundError } from "../../src/SecretNotFoundError";
-import { SecretRetriever } from "../../src/rest/SecretRetriever";
-import { UrlId } from "../../src/UrlId";
-import { Secret } from "../../src/rest/Secret";
+import { SecretRetriever } from "../../../../src/services/SecretRetriever";
+import { SecretsByIdController } from "../../../../src/SecretsByIdController";
+import { SecretNotFoundError } from "../../../../src/domain/errors/SecretNotFoundError";
+import { UrlIdValidationError } from "../../../../src/domain/errors/UrlIdValidationError";
+import { UrlId } from "../../../../src/domain/models/UrlId";
 
 describe("SecretByIdController Tests", () => {
   it("should throw an error if the urlId is too short", async () => {

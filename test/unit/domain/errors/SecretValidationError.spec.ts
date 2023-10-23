@@ -1,11 +1,9 @@
-import { SercretValidationError } from "../../src/SercretValidationError";
+import { SercretValidationError } from "../../../../src/domain/errors/SercretValidationError";
 
 describe("SercretValidationError tests", () => {
   it("should create a SercretValidationError error", () => {
     const error = new SercretValidationError("Secret is too short");
-    expect(error).toBeInstanceOf(
-      SercretValidationError
-    );
+    expect(error).toBeInstanceOf(SercretValidationError);
     expect(error.name).toBe("SercretValidationError");
     expect(error.message).toBe("Secret is too short");
   });
