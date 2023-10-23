@@ -12,6 +12,13 @@ describe("Get Secrets Intigration tests", () => {
       message: "UrlId is too short",
     });
   });
-  xit("Should return an error when secret does not exist in the system", () => {});
+  it("Should return an error when secret does not exist in the system", async () => {
+    const response = await request.get("/api/v1/secrets/123456qwertnon_existant_key");
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      name: "SecretNotFoundError",
+      message: "Secret was not found",
+    });
+  });
   xit("Should retrieve a secret from the system", () => {});
 });

@@ -8,7 +8,7 @@ describe("UrlId Tests", () => {
 
   it("should throw an error when attempting to create a URLid that is too short", () => {
     expect(() => new UrlId("123g")).toThrow(
-      new UrlIdValidationError("URLId is too short")
+      new UrlIdValidationError("UrlId is too short")
     );
   });
 });
