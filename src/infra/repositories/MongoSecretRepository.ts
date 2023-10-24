@@ -12,9 +12,12 @@ export class MongoSecretRepository implements SecretRepository {
       );
     }
   }
+  async removeSecretByUrlId(urlId: UrlId): Promise<void> {
+    const result = await SecretModel.deleteOne({ urlId: urlId.toString() });
+  }
   async getSecretByUrlId(urlId: UrlId): Promise<Secret | null> {
     const doc = await SecretModel.findOne({ urlId: urlId.toString() });
     if (doc == null) return null;
-    return new Secret("123456squirt");
+    return new Secret(doc.secret);
   }
 }

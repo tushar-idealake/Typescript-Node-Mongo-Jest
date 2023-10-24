@@ -15,9 +15,7 @@ describe("Get Secrets Integration tests", () => {
   });
   it("Should return an error when secret does not exist in the system", async () => {
     SecretModel.findOne = jest.fn().mockResolvedValue(null);
-    const response = await request.get(
-      "/api/v1/secrets/123456qwertnon_existant_key"
-    );
+    const response = await request.get("/api/v1/secrets/123456qwert_key");
 
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
@@ -25,6 +23,14 @@ describe("Get Secrets Integration tests", () => {
       message: "Secret was not found",
     });
   });
-  xit("Should retrieve a secret from the system", () => {});
+  it("Should retrieve a secret from the system", async () => {
+    SecretModel.findOne = jest.fn().mockResolvedValue({ secret: "btsaction" });
+    const response = await request.get("/api/v1/secrets/123456qwert_key");
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      secret: "btsaction",
+    });
+  });
   xit("Should throw an error when unexpected error is thrown", () => {});
 });

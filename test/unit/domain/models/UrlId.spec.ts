@@ -11,4 +11,9 @@ describe("UrlId Tests", () => {
       new UrlIdValidationError("UrlId is too short")
     );
   });
+  it("should return string representation on toString method ", () => {
+    expect(new UrlId("123456_valid_secret").toString()).toBe(
+      "123456_valid_secret"
+    );
+  });
 });

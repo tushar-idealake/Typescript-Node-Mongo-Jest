@@ -8,6 +8,7 @@ describe("OneTimeSecretRetriever tests", () => {
   it("Should throw an error if secret is not found", async () => {
     const secretRepository: SecretRepository = {
       getSecretByUrlId: jest.fn().mockResolvedValue(null),
+      removeSecretByUrlId: jest.fn(),
     };
     const oneTimeSecretRetriever = new OneTimeSecretRetriever(secretRepository);
     const urlId = new UrlId("123456qwerty");
@@ -16,6 +17,28 @@ describe("OneTimeSecretRetriever tests", () => {
     );
     expect(secretRepository.getSecretByUrlId).toBeCalledTimes(1);
     expect(secretRepository.getSecretByUrlId).toBeCalledWith(
+      new UrlId("123456qwerty")
+    );
+    expect(secretRepository.removeSecretByUrlId).toBeCalledTimes(0);
+  });
+  it("Should return the secret when it is found", async () => {
+    const secretRepository: SecretRepository = {
+      getSecretByUrlId: jest
+        .fn()
+        .mockResolvedValue(new Secret("random_secret_123")),
+      removeSecretByUrlId: jest.fn(),
+    };
+    const oneTimeSecretRetriever = new OneTimeSecretRetriever(secretRepository);
+    const urlId = new UrlId("123456qwerty");
+    expect(await oneTimeSecretRetriever.retrieveSecretByUrlId(urlId)).toEqual(
+      new Secret("random_secret_123")
+    );
+    expect(secretRepository.getSecretByUrlId).toBeCalledTimes(1);
+    expect(secretRepository.getSecretByUrlId).toBeCalledWith(
+      new UrlId("123456qwerty")
+    );
+    expect(secretRepository.removeSecretByUrlId).toBeCalledTimes(1);
+    expect(secretRepository.removeSecretByUrlId).toBeCalledWith(
       new UrlId("123456qwerty")
     );
   });

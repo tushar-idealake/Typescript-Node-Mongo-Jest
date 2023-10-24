@@ -10,9 +10,7 @@ export class OneTimeSecretRetriever implements SecretRetriever {
   async retrieveSecretByUrlId(urlId: UrlId): Promise<Secret> {
     const secret = await this.secretRepository.getSecretByUrlId(urlId);
     if (!secret) throw new SecretNotFoundError();
-    // try to retrieve a secret
-    // if found return the secret & remove the secret
-    // if not found throw an error
-    return null;
+    await this.secretRepository.removeSecretByUrlId(urlId);
+    return secret;
   }
 }
