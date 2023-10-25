@@ -32,5 +32,19 @@ describe("Get Secrets Integration tests", () => {
       secret: "btsaction",
     });
   });
-  xit("Should throw an error when unexpected error is thrown", () => {});
+  it("Should throw an error when unexpected error is thrown", async () => {
+    SecretModel.findOne = jest.fn().mockImplementation(async () => {
+      throw new Error("Connection refused");
+    });
+
+    const response = await request.get(
+      "/api/v1/secrets/123qweasdmynonexistantsecret"
+    );
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      name: "InternalServerError",
+      message: "Something went wrong",
+    });
+  });
 });
