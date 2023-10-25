@@ -1,8 +1,8 @@
-import { SercretValidationError } from "../errors/SercretValidationError";
+import { SecretValidationError } from "../errors/SercretValidationError";
 
 export class Secret {
   constructor(private secret: string) {
     if (secret.length < 3)
-      throw new SercretValidationError("Secret is too short");
+      throw new SecretValidationError("Secret is too short");
   }
 }
