@@ -43,6 +43,7 @@ describe("Store Secrets Integration tests", () => {
     });
   });
   it("should store the secret and return the urlid", async () => {
+    // mock db
     const response = await request.post("/api/v1/secrets").send({
       secret: "valid_secret",
     });
