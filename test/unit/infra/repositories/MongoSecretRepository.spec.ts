@@ -56,4 +56,17 @@ describe("MongoSecretRepository tests", () => {
     expect(SecretModel.deleteOne).toBeCalledWith(urlId);
     // expect(mongoose.connect).toBeCalledTimes(0)
   });
+  it("Should store urlid and secret into database", async () => {
+    SecretModel.create = jest.fn();
+    mongoose.connect = jest.fn();
+    const mongoSecretRepository = new MongoSecretRepository();
+    const urlId = new UrlId("123456qwerty");
+    const secret = new Secret("123456qwerty");
+    await mongoSecretRepository.storeUrlIdAndSecret(secret, urlId);
+    expect(SecretModel.create).toBeCalledTimes(1);
+    expect(SecretModel.create).toBeCalledWith({
+      secret: "123456qwerty",
+      urlId: "123456qwerty",
+    });
+  });
 });

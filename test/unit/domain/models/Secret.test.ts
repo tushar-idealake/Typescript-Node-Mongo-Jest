@@ -10,4 +10,7 @@ describe("Secret Test", () => {
       new SecretValidationError("Secret is too short")
     );
   });
+  it("should send secret representation as string in the toString Method", () => {
+    expect(new Secret("theSecret").toString()).toBe("theSecret");
+  });
 });

@@ -1,5 +1,6 @@
 import supertest from "supertest";
 import server from "../../src/server";
+import { SecretModel } from "../../src/infra/repositories/SecretModel";
 
 const request = supertest(server);
 
@@ -43,12 +44,12 @@ describe("Store Secrets Integration tests", () => {
     });
   });
   it("should store the secret and return the urlid", async () => {
-    // mock db
+    SecretModel.create = jest.fn();
     const response = await request.post("/api/v1/secrets").send({
       secret: "valid_secret",
     });
     expect(response.status).toBe(201);
-    expect(response.body.urlid.length).toBeGreaterThanOrEqual(10);
+    expect(response.body.urlId.length).toBeGreaterThanOrEqual(10);
   });
   xit("should return an unhandled exception error", async () => {});
 });
