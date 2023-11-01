@@ -51,5 +51,17 @@ describe("Store Secrets Integration tests", () => {
     expect(response.status).toBe(201);
     expect(response.body.urlId.length).toBeGreaterThanOrEqual(10);
   });
-  xit("should return an unhandled exception error", async () => {});
+  it("should return an unhandled exception error", async () => {
+    SecretModel.create = jest.fn().mockImplementation(async () => {
+      throw Error("Server memory is full");
+    });
+    const response = await request.post("/api/v1/secrets").send({
+      secret: "valid_secret",
+    });
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      name: "InternalServerError",
+      message: "Something went wrong"
+    });
+  });
 });
