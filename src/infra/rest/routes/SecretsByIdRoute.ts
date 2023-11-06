@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { SecretsByIdController } from "./SecretsByIdController";
+import { SecretsByIdController } from "../controllers/SecretsByIdController";
 import { Route } from "./Route";
 
 export class SecretsByIdRoute implements Route {

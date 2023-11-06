@@ -1,10 +1,10 @@
 import { Request, Response, request, response } from "express";
-import { SecretsController } from "../../../../src/SecretsController";
-import { RequestValidationError } from "../../../../src/RequestValidationError";
-import { SecretValidationError } from "../../../../src/domain/errors/SercretValidationError";
-import { UrlId } from "../../../../src/domain/models/UrlId";
-import { SecretStorer } from "../../../../src/services/SecretStorer";
-import { Secret } from "../../../../src/domain/models/Secret";
+import { SecretsController } from "../../../../../src/infra/rest/controllers/SecretsController";
+import { RequestValidationError } from "../../../../../src/infra/rest/controllers/RequestValidationError";
+import { SecretValidationError } from "../../../../../src/domain/errors/SercretValidationError";
+import { UrlId } from "../../../../../src/domain/models/UrlId";
+import { SecretStorer } from "../../../../../src/domain/services/SecretStorer";
+import { Secret } from "../../../../../src/domain/models/Secret";
 
 describe("SecretsController Tests", () => {
   it("should throw an error if secret is not present in the body", async () => {
