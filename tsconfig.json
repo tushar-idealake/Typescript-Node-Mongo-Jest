@@ -4,11 +4,12 @@
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "target": "ES6",
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "outDir": "dist/"
+        "outDir": "./build",
+        "skipLibCheck": true
     },
     "include": ["src","test"],
     "exclude": ["node_modules"]

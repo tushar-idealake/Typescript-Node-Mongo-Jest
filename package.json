@@ -2,10 +2,13 @@
   "name": "tdd-3-udemy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "test": "jest --forceExit",
-    "test:watch": "jest --forceExit --watchAll"
+    "test:watch": "jest --forceExit --watchAll",
+    "test:e2e": "jest --forceExit --runInBand test/e2e/*",
+    "build": "rm -rf build/&& tsc",
+    "start": "node build/src/server.js"
   },
   "keywords": [],
   "author": "Tushar Kadam <tushar_kadam@idealake.com> (Employee Of Idealake)",
